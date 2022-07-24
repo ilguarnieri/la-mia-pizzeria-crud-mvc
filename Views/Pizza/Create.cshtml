@@ -16,11 +16,12 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-            <div class="mb-3">
-                <label for="ingredientiPizza" class="form-label">Ingredienti*</label>
-                <input asp-for="Ingredients"  type="text" class="form-control" id="ingredientiPizza" aria-describedby="ingredientiPizza" required>
-                <div class="m-0 form-text">Inserisci gli ingredienti separandoli con una virgola</div>
+            <p class="mb-2">Ingredienti*</p>
+            <div class="form-floating mb-3">                   
+                <textarea class="form-control p-2" id="ingredientiPizza" style="height: 80px"
+                asp-for="Ingredients"  type="text" class="form-control" id="ingredientiPizza" aria-describedby="ingredientiPizza" required></textarea>
                 <span asp-validation-for="Ingredients" class="text-danger"></span>
+                <div class="m-0 form-text">Inserisci gli ingredienti separandoli con una virgola</div>
             </div>
 
             <div class="mb-3">

@@ -68,7 +68,8 @@ a{
     border-radius: 999px;
     font-weight: bold;
     border: 0;
-    padding: 4px;
+    padding: 4px 15px;
+    min-width: 100px;
 }
 
 .button_save{
@@ -219,4 +220,36 @@ a{
 .required-wrapper{
     bottom: 20px;
     right:  20px;
+}
+
+
+
+/*------------------------------- D E L E T E ------------------------------*/
+
+.confirm-delete {
+    max-width: 400px;
+    color: black;
+    border-radius: 20px;
+    background-color: #859AC4;
+    box-shadow: 0px 0px 1px 9999px rgb(0 0 0 / 75%);
+}
+
+.delete_button {
+    background-color: #CF464D;
+    color: white;
+    transition: all 200ms linear;
+}
+
+.delete_button:hover {
+    background-color: red;
+}
+
+.change_button {
+    background-color: darkgreen;
+    color: white;
+    transition: all 200ms linear;
+}
+
+.change_button:hover {
+    background-color: green;
 }

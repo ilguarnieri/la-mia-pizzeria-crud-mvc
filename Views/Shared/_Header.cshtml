@@ -26,6 +26,8 @@
     <script>
         const ind = "@ViewData["Title"].ToString().ToLower()";
         const item = document.getElementById(ind.replace(/ /g, ""));
-        item.classList.add("active-item");
+        if (item != null) {
+            item.classList.add("active-item");
+        }
     </script>
 </nav>

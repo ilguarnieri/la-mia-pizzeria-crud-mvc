@@ -133,24 +133,25 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Details", "Pizza", new { id = id });
         }
 
-        // GET: HomeController1/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
+            using(PizzaContext db = new PizzaContext())
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
+                Pizza pizzaDelete = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+
+                if(pizzaDelete == null)
+                {
+                    ViewData["Title"] = "Error404";
+                    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    return View("Error404");
+                }
+
+                db.Pizzas.Remove(pizzaDelete);
+                db.SaveChanges();
+                return RedirectToAction("Menu", "Pizza");
             }
         }
     }

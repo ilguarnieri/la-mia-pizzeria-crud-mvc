@@ -82,6 +82,11 @@ a{
 }
 
 
+.pizza-img{
+    object-fit: contain;
+}
+
+
 /*------------------------------- I N D E X ------------------------------*/
 .welcome-wrapper {
     color: white;

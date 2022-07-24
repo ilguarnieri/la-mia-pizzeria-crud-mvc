@@ -96,7 +96,7 @@ namespace la_mia_pizzeria_static.Controllers
                 }
 
                 ViewData["Title"] = pizzaChange.Name;
-                return View();
+                return View(pizzaChange);
             }
         }
 

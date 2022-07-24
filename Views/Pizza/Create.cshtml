@@ -1,0 +1,47 @@
+﻿
+@model Pizza
+
+<main class="patter-background p-3 pt-5 pb-5 welcome-wrapper d-flex flex-column align-items-center h-100 w-100 justify-content-center">
+
+    <section class="pizza-create container col-lg-7 col-xl-6 p-4 pb-5 p-md-5 pt-md-4 position-relative">
+
+        <h2 class="text-center text-name">Crea una nuova Pizza</h2>
+
+        <form asp-controller="Pizza" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3 pt-3">
+                <label for="nomePizza" class="form-label">Nome della pizza*</label>
+                <input asp-for="Name" type="text" class="form-control" id="nomePizza" aria-describedby="nomePizza" required>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="ingredientiPizza" class="form-label">Ingredienti*</label>
+                <input asp-for="Ingredients"  type="text" class="form-control" id="ingredientiPizza" aria-describedby="ingredientiPizza" required>
+                <div class="m-0 form-text">Inserisci gli ingredienti separandoli con una virgola</div>
+                <span asp-validation-for="Ingredients" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="prezzoPizza" class="form-label">Prezzo*</label>
+                <input asp-for="Price" type="text" pattern="^\d,[0-9]{2}$" title="Inserisci un prezzo nel formato x,xx" class="form-control" id="prezzoPizza" aria-describedby="prezzoPizza" required>
+                <span asp-validation-for="Price"  class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="urlPizza" class="form-label">Inserisci URL di una foto</label>
+                <input asp-for="Photo" type="url" pattern="https://.*" class="form-control" id="urlPizza" aria-describedby="urlPizza" placeholder="https://example.com">
+                <span asp-validation-for="Photo"  class="text-danger"></span>
+            </div>
+
+            <div class="mb-2 pt-3">
+                <button type="submit" class="pizz_button button_save w-100">Salva</button>
+            </div>
+
+        </form>
+
+        <div class="required-wrapper m-0 form-text position-absolute">* Campi obbligatori</div>
+    </section>
+
+</main>

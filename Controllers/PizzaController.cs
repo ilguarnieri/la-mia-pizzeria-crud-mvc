@@ -70,7 +70,6 @@ namespace la_mia_pizzeria_static.Controllers
 
             using(PizzaContext db = new PizzaContext())
             {
-
                 pizza.Ingredients = pizza.Ingredients.Replace(", ", ",");
                 db.Pizzas.Add(pizza);
                 db.SaveChanges();
@@ -103,16 +102,35 @@ namespace la_mia_pizzeria_static.Controllers
         // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Pizza pizza)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                ViewData["Title"] = pizza.Name;
+                return View("Edit", pizza);
             }
-            catch
+
+            using (PizzaContext db = new PizzaContext())
             {
-                return View();
+                Pizza pizzaEdit = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+
+                if(pizzaEdit == null)
+                {
+                    ViewData["Title"] = "Error404";
+                    Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                    return View("Error404");
+                }
+
+                pizzaEdit.Name = pizza.Name;
+                pizza.Ingredients = pizza.Ingredients.Replace(", ", ",");
+                pizzaEdit.Ingredients = pizza.Ingredients;
+                pizzaEdit.Price = pizza.Price;
+                pizzaEdit.Photo = pizza.Photo;
+
+                db.SaveChanges();
             }
+
+            return RedirectToAction("Details", "Pizza", new { id = id });
         }
 
         // GET: HomeController1/Delete/5

@@ -41,19 +41,23 @@
                 <p  class="mb-2 fw-bold">Ingredienti:</p>
 
                 <ul>
-                    @foreach(string  ingrediente in ingredienti)
+                    @foreach(string ingrediente in ingredienti)
                     {
-                        <li class="ms-4">@ingrediente</li>
+                        if(ingrediente != "")
+                        {
+                            <li class="ms-4">@ingrediente</li>
+                        }
                     }
                 </ul>
             </div>
 
-            
-            <button>
-                <a asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">Modifica</a>
-            </button>
-
-
+            <div class="mb-2 pt-3">
+                <a asp-controller="Pizza" asp-action="Edit" asp-route-id="@Model.Id">
+                    <button type="submit" class="pizz_button">
+                        Modifica
+                    </button>
+                </a>
+            </div>
         </div>
 
     </section>

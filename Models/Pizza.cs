@@ -19,7 +19,6 @@ namespace la_mia_pizzeria_static.Models
         public string Ingredients { get; set; }
 
         [Column("photo")]
-        [Url]
         public string? Photo { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]

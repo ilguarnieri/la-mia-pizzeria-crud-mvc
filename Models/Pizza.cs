@@ -26,6 +26,10 @@ namespace la_mia_pizzeria_static.Models
         [Range(1,30, ErrorMessage =  "Inserisci un prezzo valido")]
         public decimal Price { get; set; }
 
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+
 
         public Pizza()
         {

@@ -12,13 +12,16 @@ namespace la_mia_pizzeria_static.Controllers
         public ActionResult Menu()
         {
             List<Pizza> pizze;
+            List<Category> categories;
 
             using (PizzaContext db = new PizzaContext())
             {
                 pizze = db.Pizzas.ToList();
+                categories = db.Categories.ToList();
             }
 
             ViewData["Title"] = "Menu";
+            ViewData["Categories"] = categories;
 
             return View(pizze);
         }
@@ -52,32 +55,43 @@ namespace la_mia_pizzeria_static.Controllers
         public ActionResult Create()
         {
             ViewData["Title"] = "Crea pizza";
-            return View();
+            CategoryPizza model = new CategoryPizza();
+
+            using (PizzaContext db = new PizzaContext())
+            {
+                List<Category> categories = db.Categories.OrderBy(c => c.Name).ToList();
+
+                model.Categories = categories;
+                model.Pizza = new Pizza();
+            }
+
+            return View(model);
         }
 
         // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Pizza pizza)
+        public ActionResult Create(CategoryPizza pizzaModel)
         {
-            int newPizzaId;
-
-            if (!ModelState.IsValid)
-            {
-                ViewData["Title"] = "Crea pizza";
-                return View("Create", pizza);
-            }
-
             using(PizzaContext db = new PizzaContext())
             {
-                pizza.Ingredients = pizza.Ingredients.Replace(", ", ",");
-                db.Pizzas.Add(pizza);
+                if (!ModelState.IsValid)
+                {
+                    ViewData["Title"] = "Crea pizza";
+                    List<Category> categories = db.Categories.OrderBy(c => c.Name).ToList();
+                    pizzaModel.Categories = categories;
+
+                    return View("Create", pizzaModel);
+                }
+
+                pizzaModel.Pizza.Ingredients = pizzaModel.Pizza.Ingredients.Replace(", ", ",");
+                db.Pizzas.Add(pizzaModel.Pizza);
                 db.SaveChanges();
 
-                newPizzaId = db.Pizzas.OrderByDescending(p => p.Id).Select(p => p.Id).First();
-            }
+                int newPizzaId = db.Pizzas.OrderByDescending(p => p.Id).Select(p => p.Id).First();
 
-            return RedirectToAction("Details", "Pizza", new { id = newPizzaId });
+                return RedirectToAction("Details", "Pizza", new { id = newPizzaId });
+            }
         }
 
         // GET: HomeController1/Edit/5

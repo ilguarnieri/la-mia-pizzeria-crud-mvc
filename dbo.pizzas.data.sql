@@ -6,3 +6,13 @@ INSERT INTO [dbo].[pizzas] ([Id], [name], [ingredients], [photo], [price]) VALUE
 INSERT INTO [dbo].[pizzas] ([Id], [name], [ingredients], [photo], [price]) VALUES (7, N'Pizza Puglia', N'Datterini  gialli,Capocollo di Martina Franca,Burrata pugliese,Olive,Tarallo sbriciolato,Basilico,Olio EVO', N'puglia.jpg', CAST(8.50 AS Decimal(5, 2)))
 INSERT INTO [dbo].[pizzas] ([Id], [name], [ingredients], [photo], [price]) VALUES (8, N'Pizza Emilia', N'Fior di latte d''Agerola,Mortadella IGP,Granella di pistacchio,Basilico,Olio EVO', N'emilia.jpg', CAST(7.00 AS Decimal(5, 2)))
 SET IDENTITY_INSERT [dbo].[pizzas] OFF
+
+
+
+SET IDENTITY_INSERT [dbo].[categories] ON
+INSERT INTO [dbo].[categories] ([Id], [Name]) VALUES (1, N'Pizze Classiche')
+INSERT INTO [dbo].[categories] ([Id], [Name]) VALUES (2, N'Pizze Regionali')
+INSERT INTO [dbo].[categories] ([Id], [Name]) VALUES (3, N'Pizze Speciali')
+INSERT INTO [dbo].[categories] ([Id], [Name]) VALUES (4, N'Pizze Bianche')
+INSERT INTO [dbo].[categories] ([Id], [Name]) VALUES (5, N'Pizze Vegetariane')
+SET IDENTITY_INSERT [dbo].[categories] OFF

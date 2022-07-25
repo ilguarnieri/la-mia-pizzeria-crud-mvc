@@ -64,12 +64,13 @@ a{
     color: red !important;
 }
 
-.pizz_button{
+.pizz_button {
     border-radius: 999px;
     font-weight: bold;
     border: 0;
     padding: 4px 15px;
     min-width: 100px;
+    transition: all 200ms linear;
 }
 
 .button_save{
@@ -180,6 +181,23 @@ a{
 }
 
 
+.btn_category{
+    color: red;
+}
+
+.btn_category.active{
+    background-color: red;
+    color: white;
+}
+
+.btn_category:hover{
+    color: white;
+    background-color: red;
+}
+
+
+
+
 /*------------------------------- D E T A I L ------------------------------*/
 .pizza-detail {
     background-color: white;
@@ -211,7 +229,7 @@ a{
     border-radius: 20px;
 }
 
-    .pizza-create .form-control:focus {
+    .pizza-create .form-control:focus, .form-select:focus {
         border-color: rgb(255 0 0 / 15%);
         box-shadow: 0 0 0 0.25rem rgb(255 0 0 / 25%);
     }
@@ -230,7 +248,8 @@ a{
     max-width: 400px;
     color: black;
     border-radius: 20px;
-    background-color: #859AC4;
+    background-color: #F5DD74;
+    opacity: 0.95;
     box-shadow: 0px 0px 1px 9999px rgb(0 0 0 / 75%);
 }
 
@@ -253,3 +272,4 @@ a{
 .change_button:hover {
     background-color: green;
 }
+

@@ -31,10 +31,12 @@ namespace la_mia_pizzeria_static.Controllers
         {
 
             Pizza pizzaCurrent;
+            Category categoryCurrent;
 
             using (PizzaContext db = new PizzaContext())
             {
                 pizzaCurrent = db.Pizzas.Where(p => p.Id == id).FirstOrDefault();
+                categoryCurrent = db.Categories.Where(c => c.Id == pizzaCurrent.CategoryId).FirstOrDefault();    
             }
 
             if(pizzaCurrent == null)
@@ -46,6 +48,16 @@ namespace la_mia_pizzeria_static.Controllers
             else
             {
                 ViewData["Title"] = pizzaCurrent.Name;
+                
+                if(categoryCurrent != null)
+                {
+                    ViewData["Category"] = categoryCurrent.Name;
+                }
+                else
+                {
+                    ViewData["Category"] = "Categoria non presente";
+                }
+
                 return View(pizzaCurrent);
             }
 
@@ -108,7 +120,11 @@ namespace la_mia_pizzeria_static.Controllers
                     return View("Error404");
                 }
 
+                List<Category> categories = db.Categories.ToList();
+
                 ViewData["Title"] = pizzaChange.Name;
+                ViewData["Categories"] = categories;
+
                 return View(pizzaChange);
             }
         }
@@ -138,6 +154,7 @@ namespace la_mia_pizzeria_static.Controllers
                 pizzaEdit.Name = pizza.Name;
                 pizza.Ingredients = pizza.Ingredients.Replace(", ", ",");
                 pizzaEdit.Ingredients = pizza.Ingredients;
+                pizzaEdit.CategoryId = pizza.CategoryId;
                 pizzaEdit.Price = pizza.Price;
                 pizzaEdit.Photo = pizza.Photo;
 
